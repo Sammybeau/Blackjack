@@ -77,7 +77,7 @@ public class Deck {
   public void setupDeck() {
     this.buildDeck();
 
-    this.removeCard(deck, 10);
+/*    this.removeCard(deck, 10);
     this.removeCard(deck, 10);
     this.removeCard(deck, 10);
     this.removeCard(deck, 10);
@@ -85,10 +85,9 @@ public class Deck {
     this.removeCard(deck, 1);
     this.removeCard(deck, 1);
     this.removeCard(deck, 1);
-    this.removeCard(deck, 10);
+    this.removeCard(deck, 10);*/
 
     this.shuffleCards(deck);
-    this.printDeck(deck);
   }
 
   public int[] getDeck() {

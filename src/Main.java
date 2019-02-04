@@ -10,8 +10,7 @@ public class Main {
         int numberOfHands = 0;
         user.setDoubleOnSoftAllowed(true);
 
-        for (int i = 0; i < 20000; i++) {
-            //System.out.println("Here is our original deck with the selected cards removed:");
+        for (int i = 0; i < 1000000; i++) {
             deck.setupDeck();
 
             user.dealCard(deck.dealCard(deck.getDeck()), "dealer");
@@ -19,16 +18,9 @@ public class Main {
             user.dealCard(deck.dealCard(deck.getDeck()), "player");
             user.dealCard(deck.dealCard(deck.getDeck()), "player");
 
-        /*user.dealCard(1, "dealer");
-        user.dealCard(8, "player");
-        user.dealCard(8, "player");*/
-
-            System.out.println();
+            /*System.out.println();
             System.out.println("Dealer's initial hand: " + user.getDealerHand());
-            System.out.println("User's initial hand: " + user.getPlayerHand());
-            //System.out.println();
-            //System.out.println("Here is our deck after our deal: ");
-            //deck.printDeck(deck.getDeck());
+            System.out.println("User's initial hand: " + user.getPlayerHand());*/
 
             user.setWhetherHandIsSoft(user.getPlayerHand());
 
@@ -38,52 +30,49 @@ public class Main {
                 user.getPlayerHand().remove(1);
                 user.dealCard(deck.dealCard(deck.getDeck()), "player");
                 user.dealCard(deck.dealCard(deck.getDeck()), "player2");
-                System.out.println("The player has chosen to split");
+                /*System.out.println("The player has chosen to split");
                 System.out.println("The player's first hand: " + user.getPlayerHand());
-                System.out.println("The player's second hand: " + user.getPlayerHand2());
-                //System.out.println("The remaining deck: ");
-                //deck.printDeck(deck.getDeck());
+                System.out.println("The player's second hand: " + user.getPlayerHand2());*/
+
                 user.setUserHasSplit(true);
                 user.setBetSize2(1);
 
                 while (user.shouldHit(user.getPlayerHand())) {
-                    System.out.println();
+                    //System.out.println();
                     user.dealCard(deck.dealCard(deck.getDeck()), "player");
-                    System.out.println("The player has split, and has been dealt a new card. His first hand is now: " + user.getPlayerHand());
+                    //System.out.println("The player has split, and has been dealt a new card. His first hand is now: " + user.getPlayerHand());
                 }
                 while (user.shouldHit(user.getPlayerHand2())) {
-                    System.out.println();
+                    //System.out.println();
                     user.dealCard(deck.dealCard(deck.getDeck()), "player2");
-                    System.out.println("The player has split, and has been dealt a new card. His second hand is now: " + user.getPlayerHand2());
+                    //System.out.println("The player has split, and has been dealt a new card. His second hand is now: " + user.getPlayerHand2());
                 }
             }
             //determine if the player should double down
             else if (user.shouldDoubleDown()) {
                 user.setBetSize(2);
                 user.dealCard(deck.dealCard(deck.getDeck()), "player");
-                System.out.println();
-                System.out.println("The player had doubled down and his hand is now: " + user.getPlayerHand());
+                //System.out.println();
+                //System.out.println("The player had doubled down and his hand is now: " + user.getPlayerHand());
                 user.setUserHasDoubledDown(true);
             }
             //determine if the user should hit
             while (user.shouldHit(user.getPlayerHand())) {
-                System.out.println();
+                //System.out.println();
                 user.dealCard(deck.dealCard(deck.getDeck()), "player");
-                System.out
-                  .println("The player has not doubled down or split, and has been dealt a new card. His hand is now: " + user.getPlayerHand());
+                //System.out.println("The player has not doubled down or split, and has been dealt a new card. His hand is now: " + user.getPlayerHand());
             }
 
             //dealer's turn
             user.dealCard(deck.dealCard(deck.getDeck()), "dealer");
-            System.out.println();
-            System.out.println("The dealer's hand is: " + user.getDealerHand());
+            //System.out.println();
+            //System.out.println("The dealer's hand is: " + user.getDealerHand());
             while (user.dealerShouldHit()) {
-                System.out.println();
+                //System.out.println();
                 user.dealCard(deck.dealCard(deck.getDeck()), "dealer");
-                System.out.println("The dealer has taken another card. His hand is now: " + user.getDealerHand());
+                //System.out.println("The dealer has taken another card. His hand is now: " + user.getDealerHand());
             }
 
-            //TODO need to add when dealer has a BJ and user does not
 
             //determine who wins!
             playerFinalValue = user.getHandValue(user.getPlayerHand());
@@ -102,7 +91,7 @@ public class Main {
             }
             //if the dealer got a blackjack and the player does not have one
             if (user.userHasBlackjack(user.getDealerHand()) && !user.userHasBlackjack(user.getPlayerHand())) {
-                System.out.println("Dealer got a blackjack, player does not, and we will skip the rest!");
+                //System.out.println("Dealer got a blackjack, player does not, and we will skip the rest!");
             }
             //if the user has split
             else if (user.getUserHasSplit()) {
@@ -156,7 +145,7 @@ public class Main {
 
             numberOfHands++;
 
-            System.out.println();
+            /*System.out.println();
             System.out.println("The final hand of the user is: " + user.getPlayerHand());
             if (user.getUserHasSplit()) {
                 System.out.println("The final second hand of the user is: " + user.getPlayerHand2());
@@ -168,7 +157,7 @@ public class Main {
             System.out.println();
             System.out.println(
               "______________________________________________________________________________________________________________________________________________________________________");
-            System.out.println();
+            System.out.println();*/
 
             //reset
             user.clearHand(user.getPlayerHand());
