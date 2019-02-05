@@ -1,6 +1,103 @@
-public class Main {
+import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-    public static void main(String[] args) {
+public class Main extends Application {
+
+    ArrayList<Integer> cardsToRemove = new ArrayList<>();
+
+    public void start(Stage s) {
+        s.setTitle("Blackjack");
+
+        Button two = new Button("2");
+        Button three = new Button("3");
+        Button four = new Button("4");
+        Button five = new Button("5");
+        Button six = new Button("6");
+        Button seven = new Button("7");
+        Button eight = new Button("8");
+        Button nine = new Button("9");
+        Button ten = new Button("10");
+        Button ace = new Button("A");
+        Button calculate = new Button("Calculate");
+        Button reset = new Button("Reset");
+        Label result = new Label();
+
+        HBox cardButtons = new HBox();
+        HBox calculationReset = new HBox();
+        VBox rootPane = new VBox();
+
+        EventHandler<ActionEvent> calculateEV = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                result.setText(calculate());
+            }
+        };
+
+        EventHandler<ActionEvent> removeCard = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (event.getSource() == two) {
+                    cardsToRemove.add(2);
+                } else if (event.getSource() == three) {
+                    cardsToRemove.add(3);
+                } else if (event.getSource() == four) {
+                    cardsToRemove.add(4);
+                } else if (event.getSource() == five) {
+                    cardsToRemove.add(5);
+                } else if (event.getSource() == six) {
+                    cardsToRemove.add(6);
+                } else if (event.getSource() == seven) {
+                    cardsToRemove.add(7);
+                } else if (event.getSource() == eight) {
+                    cardsToRemove.add(8);
+                } else if (event.getSource() == nine) {
+                    cardsToRemove.add(9);
+                } else if (event.getSource() == ten) {
+                    cardsToRemove.add(10);
+                } else if (event.getSource() == ace) {
+                    cardsToRemove.add(1);
+                } else {
+                    cardsToRemove.clear();
+                }
+                System.out.println(cardsToRemove);
+            }
+        };
+
+        calculate.setOnAction(calculateEV);
+        two.setOnAction(removeCard);
+        three.setOnAction(removeCard);
+        four.setOnAction(removeCard);
+        five.setOnAction(removeCard);
+        six.setOnAction(removeCard);
+        seven.setOnAction(removeCard);
+        eight.setOnAction(removeCard);
+        nine.setOnAction(removeCard);
+        ten.setOnAction(removeCard);
+        ace.setOnAction(removeCard);
+        reset.setOnAction(removeCard);
+
+        cardButtons.getChildren().addAll(two,three,four,five,six,seven,eight,nine,ten,ace);
+        calculationReset.getChildren().addAll(calculate,reset);
+
+        rootPane.getChildren().addAll(cardButtons,calculationReset,result);
+        Scene scene = new Scene(rootPane, 500, 150);
+        scene.getStylesheets().add("Button.css");
+        s.setScene(scene);
+
+        s.show();
+    }
+
+    public String calculate() {
         Deck deck = new Deck();
         User user = new User();
         int playerFinalValue = 0;
@@ -8,10 +105,11 @@ public class Main {
         int dealerFinalValue = 0;
         double numberOfWins = 0;
         int numberOfHands = 0;
+
         user.setDoubleOnSoftAllowed(true);
 
         for (int i = 0; i < 1000000; i++) {
-            deck.setupDeck();
+            deck.setupDeck(cardsToRemove);
 
             user.dealCard(deck.dealCard(deck.getDeck()), "dealer");
 
@@ -167,6 +265,11 @@ public class Main {
             user.setUserHasSplit(false);
         }
         System.out.println(numberOfWins/numberOfHands);
+        return Double.toString(numberOfWins/numberOfHands);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
 

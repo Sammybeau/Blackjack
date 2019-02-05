@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
@@ -74,7 +75,7 @@ public class Deck {
     System.out.println();
   }
 
-  public void setupDeck() {
+  public void setupDeck(ArrayList<Integer> cards) {
     this.buildDeck();
 
 /*    this.removeCard(deck, 10);
@@ -86,6 +87,10 @@ public class Deck {
     this.removeCard(deck, 1);
     this.removeCard(deck, 1);
     this.removeCard(deck, 10);*/
+
+    for (int i: cards) {
+      this.removeCard(deck, i);
+    }
 
     this.shuffleCards(deck);
   }
