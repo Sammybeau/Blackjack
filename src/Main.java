@@ -5,15 +5,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    ArrayList<Integer> cardsToRemove = new ArrayList<>();
+    private ArrayList<Integer> cardsToRemove = new ArrayList<>();
 
     public void start(Stage s) {
         s.setTitle("Blackjack");
